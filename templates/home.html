@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Pawsitive care</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    {% load static %}
+    <header>
+        <div class="logo">
+            <p>
+                <?xml version="1.0" ?><svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg"><rect fill="none" height="256" width="256"/><circle cx="212" cy="108" fill="none" r="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="44" cy="108" fill="none" r="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="92" cy="60" fill="none" r="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="164" cy="60" fill="none" r="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M183.2,155.9a43.6,43.6,0,0,1-20.6-26h0a36,36,0,0,0-69.2,0h0a43.6,43.6,0,0,1-20.6,26A32,32,0,0,0,88,216a32.4,32.4,0,0,0,12.5-2.5,71.8,71.8,0,0,1,55,0A32.4,32.4,0,0,0,168,216a32,32,0,0,0,15.2-60.1Z" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
+            </p>
+            <p>sitive Care</p>
+        </div>
+        <!-- <div class="store-name">l
+            Pawsitive care 
+        </div> -->
+        <nav class="nav-list">
+            <ul class="list">
+                <li><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="/products" target="_self">Products</a></li>
+                <li><a href="/appointments"target="_self">Appointments</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="/logout">logout</a></li>
+                {% else %}
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">register</a></li>
+                {% endif %}
+                
+            </ul>
+        </nav>
+        <div class="cart">
+            {% if user.is_authenticated %}
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAlCAYAAADFniADAAAAAXNSR0IArs4c6QAAAgJJREFUWEftlj0vBFEUhp9t/QC1r0JEIdFoxEf8A9FoEFGoFH4A/oBIFESDUkKiFQWdTqGQSAilRKLV2nezMzmumZ07dz6yxZ5kNruZufc8+573njMNujAaXchED8q3Kq5SA4CuKD4AXbWGC/XuQAnmHlirE84HSmB7zY/duuRKgrK5bSkH61Ir6/TZctamVhaUSrbTlk6Gn6tDrSwole/OmF+GP6vaW1lQyn/aVGe1YpA/J9wHaratVsVcrQqoEt5jJql/lQ0ZHyQfpZTcGl6/y2im8qusEUXccnyhtNCqVYbh3ZMtqFbkgbKGlzHVHkJDKulPRvGnB+aBcg1fpMOnqpRXKbeE8WkJkEu9T39S8W9S5FFKG6hfJZozB5hbOtlAdogjL5SrVsg87Fi6kPJpTdF5mDnkQ5QqMg/d0iUelhAoqWXbg94eVEafmDFzVOvi3lTUU1pfxjxM9WOoUq7hfVSyz6SqFGr0aPNodtlXZh84Hf9ztw2UUT6f5MHPFCmfki4D08ATcJRBsQTMA8/AYadni0BtAQdm831gOyXZBnBi7h0Dm2lgRaAegCmz8RfQn5LoFlgw936AviqgLoFFs/EjMJmSSMN7xdx7AUargBoHLoAx4LPdFG9SEg0BV8AE8A2sN79fVwEV7TkCvHoetWHgLevZIp7K2jv4fg/KV7pfQLtfJkwHwesAAAAASUVORK5CYII="/>  
+            {% endif %}
+        </div>
+        
+    </header>
+    <hr color="black" size="3px">
+    <div class="store-name">
+        Pawsitive care 
+    </div>
+    <section class="home">
+        <div class="home-content">
+            <h1 class="slogan">"Your Pet's Happiness, Our Passion"</h1>
+            <p class="about">
+                Our pet product/care center is a one-stop shop for all your pet's needs. We carry a wide variety of food, treats, toys, and other supplies, as well as offer grooming, boarding, and training services. 
+            </p>
+            <br>
+            <div class="btn-box">
+                <a href="/products" class="btn">Shop products </a>
+                <a href="/appointments" class="btn">Appointment</a>
+            </div>
+        </div>
+        
+        <div class="home-img ">
+        </div>
+    </section>
+    
+    <hr color="black" size="3px">
+    <section class="about-container" id="about">
+        <div class="about-header">
+            <h2>About Us</h2>
+        </div>
+        <hr color="black" size="3px">
+        <div class="services">
+            <div class="service">
+                <table  class="service-table">
+                    <tr class="service-img">
+                        <td><div class="service-img-1"><img src="{% static 'images/service-img-2.jpg'%}" alt=""></div></td>
+                    </tr>
+                    <tr> <td><hr color="black"></td></tr>
+                    <tr class="service-desc">
+                        <td> <p>we sell a wide range of products from pet food to toys to accessories tested to be safe for your pet </p></td>
+                    </tr>
+                    <tr class="service-btn">
+                        <td>
+                            <a href="/products"><div class="service-btn-box">
+                                <p>Buy now</p>
+                            </div></a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="service">
+                <table  class="service-table">
+                    <tr class="service-img">
+                        <td><div class="service-img-1"><img src="{% static 'images/service-img-2.jpg'%}" alt=""></div></td>
+                    </tr>
+                    <tr> <td><hr color="black"></td></tr>
+                    <tr class="service-desc">
+                        <td> <p>we sell a wide range of products from pet food to toys to accessories tested to be safe for your pet </p></td>
+                    </tr>
+                    <tr class="service-btn">
+                        <td>
+                            <a href="/products"><div class="service-btn-box">
+                                <p>Buy now</p>
+                            </div></a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="service">
+                <table  class="service-table">
+                    <tr class="service-img">
+                        <td><div class="service-img-1"><img src="{% static 'images/service-img-2.jpg'%}" alt=""></div></td>
+                    </tr>
+                    <tr> <td><hr color="black"></td></tr>
+                    <tr class="service-desc">
+                        <td> <p>we sell a wide range of products from pet food to toys to accessories tested to be safe for your pet </p></td>
+                    </tr>
+                    <tr class="service-btn">
+                        <td>
+                            <a href="/appointments"><div class="service-btn-box">
+                                <p>Appointment</p>
+                            </div></a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="staffs">
+    <div class="about-header">
+        <h2 class="staff-heading">
+            Our Staff
+        </h2>
+    </div>
+    
+        <div class="services">
+            <div class="staff">
+                <div class="staff-img">
+                    <img src="{% static 'images/doc1.png'%}" alt="hello"  height="100%" width="auto"/>
+                </div>
+                <div style="width : 80%;padding-left :30px;"><hr color="black"></div>
+                <div class="staff-desc">
+                    <p>doctor 1 has 5 years of exp in perfoming <br> general serguries on pets </p>
+                </div>
+            </div>
+            <div class="staff">
+                <div class="staff-img">
+                    <img src="{% static 'images/nurse.png'%}" alt="hello"  height="100%" width="auto"/>
+                </div>
+                <div style="width : 80%;padding-left :30px;"><hr color="black"></div>
+                <div class="staff-desc">
+                    <p>staff 1 has 5 years of exp in handling pets </p>
+                </div>
+            </div>            
+            <div class="staff">
+                <div class="staff-img">
+                    <img src="{% static 'images/doc2.png'%}" alt="hello"  height="100%" width="auto"/>
+                </div>
+                <div style="width : 80%;padding-left :30px;"><hr color="black"></div>
+                <div class="staff-desc">
+                    <p>staff 1 has 5 years of exp in handling pets </p>
+                </div>
+            </div>    
+        </section>
+
+
+</body>
+</html>

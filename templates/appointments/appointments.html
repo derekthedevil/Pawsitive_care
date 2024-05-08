@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width= , initial-scale=1.0" />
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/appointments.css' %}" />
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <p>
+                <?xml version="1.0" ?><svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+                    <rect fill="none" height="256" width="256" />
+                    <circle cx="212" cy="108" fill="none" r="20" stroke="#000" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="16" />
+                    <circle cx="44" cy="108" fill="none" r="20" stroke="#000" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="16" />
+                    <circle cx="92" cy="60" fill="none" r="20" stroke="#000" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="16" />
+                    <circle cx="164" cy="60" fill="none" r="20" stroke="#000" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="16" />
+                    <path
+                        d="M183.2,155.9a43.6,43.6,0,0,1-20.6-26h0a36,36,0,0,0-69.2,0h0a43.6,43.6,0,0,1-20.6,26A32,32,0,0,0,88,216a32.4,32.4,0,0,0,12.5-2.5,71.8,71.8,0,0,1,55,0A32.4,32.4,0,0,0,168,216a32,32,0,0,0,15.2-60.1Z"
+                        fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
+                </svg>
+            </p>
+            <p>sitive Care</p>
+        </div>
+        <!-- <div class="store-name">l
+            Pawsitive care 
+        </div> -->
+        <nav class="nav-list">
+            <ul class="list">
+                <li><a href="i/">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="/products" target="_self">Products</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="/logout">logout</a></li>
+                {% else %}
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">register</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        <div class="cart">
+            <img
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAlCAYAAADFniADAAAAAXNSR0IArs4c6QAAAgJJREFUWEftlj0vBFEUhp9t/QC1r0JEIdFoxEf8A9FoEFGoFH4A/oBIFESDUkKiFQWdTqGQSAilRKLV2nezMzmumZ07dz6yxZ5kNruZufc8+573njMNujAaXchED8q3Kq5SA4CuKD4AXbWGC/XuQAnmHlirE84HSmB7zY/duuRKgrK5bSkH61Ir6/TZctamVhaUSrbTlk6Gn6tDrSwole/OmF+GP6vaW1lQyn/aVGe1YpA/J9wHaratVsVcrQqoEt5jJql/lQ0ZHyQfpZTcGl6/y2im8qusEUXccnyhtNCqVYbh3ZMtqFbkgbKGlzHVHkJDKulPRvGnB+aBcg1fpMOnqpRXKbeE8WkJkEu9T39S8W9S5FFKG6hfJZozB5hbOtlAdogjL5SrVsg87Fi6kPJpTdF5mDnkQ5QqMg/d0iUelhAoqWXbg94eVEafmDFzVOvi3lTUU1pfxjxM9WOoUq7hfVSyz6SqFGr0aPNodtlXZh84Hf9ztw2UUT6f5MHPFCmfki4D08ATcJRBsQTMA8/AYadni0BtAQdm831gOyXZBnBi7h0Dm2lgRaAegCmz8RfQn5LoFlgw936AviqgLoFFs/EjMJmSSMN7xdx7AUargBoHLoAx4LPdFG9SEg0BV8AE8A2sN79fVwEV7TkCvHoetWHgLevZIp7K2jv4fg/KV7pfQLtfJkwHwesAAAAASUVORK5CYII=" />
+        </div>
+    </header>
+    <hr color="black" size="3px" />
+    <div class="store-name">Appointments</div>
+    <section class="appointment-page">
+        <div class="response">
+            <div>
+                <h1>Appointment details</h1>
+            </div>
+            <div class="pet-type">
+                <h2>select your pet type</h2>
+                <select name="pet-type" id="pet-type" class="select-option" placeholder="select">
+                    <option value>select</option>
+                    <option value="Dog">Dog</option>
+                    <option value="Cat">Cat</option>
+                    <option value="parrot">parrot</option>
+                </select>
+            </div>
+            <div class="appointment-for">
+                <h2>select your service</h2>
+                <select name="reason" id="reason" class="select-option">
+                    <option value>select</option>
+                    <option value="grooming">gromming</option>
+                    <option value="hair-cut">Hair cut</option>
+                    <option value="Nail-cut">nail cutting</option>
+                    <option value="grooming">gromming</option>
+                </select>
+            </div>
+            <div class="additional-info">
+                <h2>Addition information (optional)</h2>
+                <textarea name="add-info" id="add-info" cols="35" rows="8">
+additional information that we should know</textarea>
+            </div>
+        </div>
+        <div class="date-time">
+            <div class="date-day">
+                <div class="date-day-header">
+                    <button>previous week</button>
+                    <button>next week</button>
+                </div>
+            </div>
+            <div class="slot-selector">
+                <table border="1" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <th>monday</th>
+                        <th>tuesday</th>
+                        <th>wednesday</th>
+                        <th>thursday</th>
+                        <th>friday</th>
+                        <th>saturday</th>
+                        <th>sunday</th>
+                    </tr>
+                    <tr>
+                        <td id="green">1:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td id="blue">2:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td id="green">2:00 AM</td>
+                    </tr>
+                    <tr>
+                        <td>1:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td id="blue">2:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td>2:00 AM</td>
+                    </tr>
+                    <tr>
+                        <td>1:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td id="green">2:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td id="blue">2:00 AM</td>
+                    </tr>
+                    <tr>
+                        <td>1:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td id="green">2:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td>2:00 AM</td>
+                    </tr>
+                    <tr>
+                        <td>1:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td id="blue">2:00 AM</td>
+                        <td>2:00 AM</td>
+                    </tr>
+                    <tr>
+                        <td>1:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td id="green">2:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td>2:00 AM</td>
+                    </tr>
+                    <tr>
+                        <td>1:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td id="green">2:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td>2:00 AM</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

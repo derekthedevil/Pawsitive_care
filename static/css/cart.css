@@ -1,0 +1,46 @@
+body{
+    display: grid;
+    grid-template-columns: 70% auto;
+    background-color: black;
+    padding: 10px;
+    height: 100vh;
+    width: 100vw;
+}
+
+.cart-details{
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    z-index: 10;
+}
+
+table{
+    width: 100%;
+    height: 100%;
+}
+
+
+.header{
+    width: 100%;
+}
+
+.item-name{
+    width: 50%;
+    text-align: left;
+}
+
+.products{
+    width: 100%;
+    background-color: black;
+    height: 100%;
+}
+
+
+
+
+
+.summary{
+    width: auto;
+    height: 100%;
+    background-color: aqua;
+}
