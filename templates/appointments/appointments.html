@@ -35,8 +35,8 @@
         </div> -->
         <nav class="nav-list">
             <ul class="list">
-                <li><a href="i/">Home</a></li>
-                <li><a href="#about">About</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/#about">About</a></li>
                 <li><a href="/products" target="_self">Products</a></li>
                 {% if user.is_authenticated %}
                 <li><a href="/logout">logout</a></li>
@@ -53,27 +53,29 @@
     </header>
     <hr color="black" size="3px" />
     <div class="store-name">Appointments</div>
-    <section class="appointment-page">
+    <form method="POST">
+        {% csrf_token %}
+    <section class="appointment-page" method="POST">
+        
         <div class="response">
             <div>
                 <h1>Appointment details</h1>
             </div>
             <div class="pet-type">
                 <h2>select your pet type</h2>
-                <select name="pet-type" id="pet-type" class="select-option" placeholder="select">
-                    <option value>select</option>
-                    <option value="Dog">Dog</option>
-                    <option value="Cat">Cat</option>
+                <select name="pet-type" id="pet-type"  class="select-option" required >
+                    
+                    <option value="dog">Dog</option>
+                    <option value="cat">Cat</option>
                     <option value="parrot">parrot</option>
                 </select>
             </div>
             <div class="appointment-for">
                 <h2>select your service</h2>
-                <select name="reason" id="reason" class="select-option">
-                    <option value>select</option>
+                <select name="service" id="reason" class="select-option" required>
                     <option value="grooming">gromming</option>
                     <option value="hair-cut">Hair cut</option>
-                    <option value="Nail-cut">nail cutting</option>
+                    <option value="nail-cut">nail cutting</option>
                     <option value="grooming">gromming</option>
                 </select>
             </div>
@@ -86,88 +88,145 @@ additional information that we should know</textarea>
         <div class="date-time">
             <div class="date-day">
                 <div class="date-day-header">
-                    <button>previous week</button>
-                    <button>next week</button>
+                    <a  href="/appointments/last_week">< last week</a>
+                    <a href="/appointments/next_week">next week ></a>
                 </div>
             </div>
             <div class="slot-selector">
-                <table border="1" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <th>monday</th>
-                        <th>tuesday</th>
-                        <th>wednesday</th>
-                        <th>thursday</th>
-                        <th>friday</th>
-                        <th>saturday</th>
-                        <th>sunday</th>
+                <table border="1" cellspacing="0" cellpadding="0" class="container">
+                    {% for appointment in appointments %}
+                    <tr class="">
+                        <th class="one_by_eight"> <p>{{appointment.date}} </p></th>
+                        
+                        {% if appointment.slot_9AM_to_10AM == "available" %}
+                            <td><div class="app-check bg_green">
+                                <input type="radio" class="option-input radio" name="date-time-slot" value="{{appointment.date}}:slot_1" />
+                                <div class="app-border">
+                                <label class="app-label">9AM-10AM
+                                </label>
+                            </div>
+                            </td>
+                        {% else %}
+                        <td><div class="app-check bg_red">
+                            <input type="radio" class="option-input radio " disabled name="date-time-slot" value="{{appointment.date}}:slot_1"/>
+                            <div class="app-border">
+                            <label class="app-label">9AM-10AM
+                            </label>
+                        </div>
+                        </td>
+                        {% endif %}
+                        {% if appointment.slot_10AM_to_11AM == "available" %}
+                            <td><div class="app-check bg_green">
+                                <input type="radio" class="option-input radio" name="date-time-slot" value="{{appointment.date}}:slot_2"/>
+                                <div class="app-border">
+                                <label class="app-label">10AM-11AM
+                                </label>
+                            </div>
+                            </td>
+                        {% else %}
+                        <td><div class="app-check bg_red">
+                            <input type="radio" class="option-input radio " disabled name="date-time-slot" value="{{appointment.date}}:slot_2"/>
+                            <div class="app-border">
+                            <label class="app-label">10AM-11AM
+                            </label>
+                        </div>
+                        </td>
+                        {% endif %}
+                        {% if appointment.slot_11AM_to_12PM == "available" %}
+                            <td><div class="app-check bg_green">
+                                <input type="radio" class="option-input radio" name="date-time-slot" value="{{appointment.date}}:slot_3"/>
+                                <div class="app-border">
+                                <label class="app-label">11AM-12PM
+                                </label>
+                            </div>
+                            </td>
+                        {% else %}
+                        <td><div class="app-check bg_red">
+                            <input type="radio" class="option-input radio " disabled name="date-time-slot" value="{{appointment.date}}:slot_3"/>
+                            <div class="app-border">
+                            <label class="app-label">11AM-12PM
+                            </label>
+                        </div>
+                        </td>
+                        {% endif %}
+                        {% if appointment.slot_1PM_to_2PM == "available" %}
+                            <td><div class="app-check bg_green">
+                                <input type="radio" class="option-input radio" name="date-time-slot" value="{{appointment.date}}:slot_4"/>
+                                <div class="app-border">
+                                <label class="app-label">1PM-2PM
+                                </label>
+                            </div>
+                            </td>
+                        {% else %}
+                        <td><div class="app-check bg_red">
+                            <input type="radio" class="option-input radio " disabled name="date-time-slot" value="{{appointment.date}}:slot_4"/>
+                            <div class="app-border">
+                            <label class="app-label">1PM-2PM
+                            </label>
+                        </div>
+                        </td>
+                        {% endif %}
+                        {% if appointment.slot_2PM_to_3PM == "available" %}
+                            <td><div class="app-check bg_green">
+                                <input type="radio" class="option-input radio" name="date-time-slot" value="{{appointment.date}}:slot_5"/>
+                                <div class="app-border">
+                                <label class="app-label">2PM-3PM
+                                </label>
+                            </div>
+                            </td>
+                        {% else %}
+                        <td><div class="app-check bg_red">
+                            <input type="radio" class="option-input radio " disabled name="date-time-slot" value="{{appointment.date}}:slot_5"/>
+                            <div class="app-border">
+                            <label class="app-label">2PM-3PM
+                            </label>
+                        </div>
+                        </td>
+                        {% endif %}
+                        {% if appointment.slot_4PM_to_5PM == "available" %}
+                            <td><div class="app-check bg_green">
+                                <input type="radio" class="option-input radio" name="date-time-slot" value="{{appointment.date}}:slot_6"/>
+                                <div class="app-border">
+                                <label class="app-label">4PM-5PM
+                                </label>
+                            </div>
+                            </td>
+                        {% else %}
+                        <td><div class="app-check bg_red">
+                            <input type="radio" class="option-input radio " disabled name="date-time-slot" value="{{appointment.date}}:slot_6"/>
+                            <div class="app-border">
+                            <label class="app-label">4PM-5PM
+                            </label>
+                        </div>
+                        </td>
+                        {% endif %}
+                        {% if appointment.slot_5PM_to_6Pm == "available" %}
+                            <td><div class="app-check bg_green">
+                                <input type="radio" class="option-input radio" name="date-time-slot" value="{{appointment.date}}:slot_7"/>
+                                <div class="app-border">
+                                <label class="app-label">5PM-6PM
+                                </label>
+                            </div>
+                            </td>
+                        {% else %}
+                        <td><div class="app-check bg_red">
+                            <input type="radio" class="option-input radio " disabled name="date-time-slot" value="{{appointment.date}}:slot_7"/>
+                            <div class="app-border">
+                            <label class="app-label">5PM-6PM
+                            </label>
+                        </div>
+                        </td>
+                        {% endif %}
                     </tr>
-                    <tr>
-                        <td id="green">1:00 AM</td>
-                        <td>2:00 AM</td>
-                        <td id="blue">2:00 AM</td>
-                        <td>2:00 AM</td>
-                        <td>2:00 AM</td>
-                        <td>2:00 AM</td>
-                        <td id="green">2:00 AM</td>
-                    </tr>
-                    <tr>
-                        <td>1:00 AM</td>
-                        <td>2:00 AM</td>
-                        <td>2:00 AM</td>
-                        <td id="blue">2:00 AM</td>
-                        <td>2:00 AM</td>
-                        <td>2:00 AM</td>
-                        <td>2:00 AM</td>
-                    </tr>
-                    <tr>
-                        <td>1:00 AM</td>
-                        <td>2:00 AM</td>
-                        <td id="green">2:00 AM</td>
-                        <td>2:00 AM</td>
-                        <td>2:00 AM</td>
-                        <td>2:00 AM</td>
-                        <td id="blue">2:00 AM</td>
-                    </tr>
-                    <tr>
-                        <td>1:00 AM</td>
-                        <td>2:00 AM</td>
-                        <td>2:00 AM</td>
-                        <td id="green">2:00 AM</td>
-                        <td>2:00 AM</td>
-                        <td>2:00 AM</td>
-                        <td>2:00 AM</td>
-                    </tr>
-                    <tr>
-                        <td>1:00 AM</td>
-                        <td>2:00 AM</td>
-                        <td>2:00 AM</td>
-                        <td>2:00 AM</td>
-                        <td>2:00 AM</td>
-                        <td id="blue">2:00 AM</td>
-                        <td>2:00 AM</td>
-                    </tr>
-                    <tr>
-                        <td>1:00 AM</td>
-                        <td>2:00 AM</td>
-                        <td>2:00 AM</td>
-                        <td id="green">2:00 AM</td>
-                        <td>2:00 AM</td>
-                        <td>2:00 AM</td>
-                        <td>2:00 AM</td>
-                    </tr>
-                    <tr>
-                        <td>1:00 AM</td>
-                        <td>2:00 AM</td>
-                        <td>2:00 AM</td>
-                        <td>2:00 AM</td>
-                        <td id="green">2:00 AM</td>
-                        <td>2:00 AM</td>
-                        <td>2:00 AM</td>
-                    </tr>
+                    {% endfor %}
+                    
                 </table>
+                <input type="submit" value="hello">
             </div>
         </div>
+    
     </section>
+</form>
 </body>
 
 </html>
