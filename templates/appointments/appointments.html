@@ -63,7 +63,7 @@
             </div>
             <div class="pet-type">
                 <h2>select your pet type</h2>
-                <select name="pet-type" id="pet-type"  class="select-option" required >
+                <select name="pet_type" id="pet_type"  class="select-option" required >
                     
                     <option value="dog">Dog</option>
                     <option value="cat">Cat</option>
@@ -81,7 +81,7 @@
             </div>
             <div class="additional-info">
                 <h2>Addition information (optional)</h2>
-                <textarea name="add-info" id="add-info" cols="35" rows="8">
+                <textarea name="add_info" id="add-info" cols="35" rows="8">
 additional information that we should know</textarea>
             </div>
         </div>
@@ -100,7 +100,7 @@ additional information that we should know</textarea>
                         
                         {% if appointment.slot_9AM_to_10AM == "available" %}
                             <td><div class="app-check bg_green">
-                                <input type="radio" class="option-input radio" name="date-time-slot" value="{{appointment.date}}:slot_1" />
+                                <input type="radio" class="option-input radio" name="date-time-slot" default="none" value="{{appointment.date}}:slot_9AM_to_10AM" />
                                 <div class="app-border">
                                 <label class="app-label">9AM-10AM
                                 </label>
@@ -108,7 +108,7 @@ additional information that we should know</textarea>
                             </td>
                         {% else %}
                         <td><div class="app-check bg_red">
-                            <input type="radio" class="option-input radio " disabled name="date-time-slot" value="{{appointment.date}}:slot_1"/>
+                            <input type="radio" class="option-input radio " disabled name="date-time-slot" value="{{appointment.date}}:slot_9AM_to_10AM"/>
                             <div class="app-border">
                             <label class="app-label">9AM-10AM
                             </label>
@@ -117,7 +117,7 @@ additional information that we should know</textarea>
                         {% endif %}
                         {% if appointment.slot_10AM_to_11AM == "available" %}
                             <td><div class="app-check bg_green">
-                                <input type="radio" class="option-input radio" name="date-time-slot" value="{{appointment.date}}:slot_2"/>
+                                <input type="radio" class="option-input radio" name="date-time-slot" value="{{appointment.date}}:slot_10AM_to_11AM"/>
                                 <div class="app-border">
                                 <label class="app-label">10AM-11AM
                                 </label>
@@ -125,7 +125,7 @@ additional information that we should know</textarea>
                             </td>
                         {% else %}
                         <td><div class="app-check bg_red">
-                            <input type="radio" class="option-input radio " disabled name="date-time-slot" value="{{appointment.date}}:slot_2"/>
+                            <input type="radio" class="option-input radio " disabled name="date-time-slot" value="{{appointment.date}}:slot_10AM_to_11AM"/>
                             <div class="app-border">
                             <label class="app-label">10AM-11AM
                             </label>
@@ -134,7 +134,7 @@ additional information that we should know</textarea>
                         {% endif %}
                         {% if appointment.slot_11AM_to_12PM == "available" %}
                             <td><div class="app-check bg_green">
-                                <input type="radio" class="option-input radio" name="date-time-slot" value="{{appointment.date}}:slot_3"/>
+                                <input type="radio" class="option-input radio" name="date-time-slot" value="{{appointment.date}}:slot_11AM_to_12PM"/>
                                 <div class="app-border">
                                 <label class="app-label">11AM-12PM
                                 </label>
@@ -142,7 +142,7 @@ additional information that we should know</textarea>
                             </td>
                         {% else %}
                         <td><div class="app-check bg_red">
-                            <input type="radio" class="option-input radio " disabled name="date-time-slot" value="{{appointment.date}}:slot_3"/>
+                            <input type="radio" class="option-input radio " disabled name="date-time-slot" value="{{appointment.date}}:slot_11AM_to_12PM"/>
                             <div class="app-border">
                             <label class="app-label">11AM-12PM
                             </label>
@@ -151,7 +151,7 @@ additional information that we should know</textarea>
                         {% endif %}
                         {% if appointment.slot_1PM_to_2PM == "available" %}
                             <td><div class="app-check bg_green">
-                                <input type="radio" class="option-input radio" name="date-time-slot" value="{{appointment.date}}:slot_4"/>
+                                <input type="radio" class="option-input radio" name="date-time-slot" value="{{appointment.date}}:slot_1PM_to_2PM"/>
                                 <div class="app-border">
                                 <label class="app-label">1PM-2PM
                                 </label>
@@ -159,7 +159,7 @@ additional information that we should know</textarea>
                             </td>
                         {% else %}
                         <td><div class="app-check bg_red">
-                            <input type="radio" class="option-input radio " disabled name="date-time-slot" value="{{appointment.date}}:slot_4"/>
+                            <input type="radio" class="option-input radio " disabled name="date-time-slot" value="{{appointment.date}}:slot_1PM_to_2PM"/>
                             <div class="app-border">
                             <label class="app-label">1PM-2PM
                             </label>
@@ -168,7 +168,7 @@ additional information that we should know</textarea>
                         {% endif %}
                         {% if appointment.slot_2PM_to_3PM == "available" %}
                             <td><div class="app-check bg_green">
-                                <input type="radio" class="option-input radio" name="date-time-slot" value="{{appointment.date}}:slot_5"/>
+                                <input type="radio" class="option-input radio" name="date-time-slot" value="{{appointment.date}}:slot_2PM_to_3PM"/>
                                 <div class="app-border">
                                 <label class="app-label">2PM-3PM
                                 </label>
@@ -176,7 +176,7 @@ additional information that we should know</textarea>
                             </td>
                         {% else %}
                         <td><div class="app-check bg_red">
-                            <input type="radio" class="option-input radio " disabled name="date-time-slot" value="{{appointment.date}}:slot_5"/>
+                            <input type="radio" class="option-input radio " disabled name="date-time-slot" value="{{appointment.date}}:slot_2PM_to_3PM"/>
                             <div class="app-border">
                             <label class="app-label">2PM-3PM
                             </label>
@@ -185,7 +185,7 @@ additional information that we should know</textarea>
                         {% endif %}
                         {% if appointment.slot_4PM_to_5PM == "available" %}
                             <td><div class="app-check bg_green">
-                                <input type="radio" class="option-input radio" name="date-time-slot" value="{{appointment.date}}:slot_6"/>
+                                <input type="radio" class="option-input radio" name="date-time-slot" value="{{appointment.date}}:slot_4PM_to_5PM"/>
                                 <div class="app-border">
                                 <label class="app-label">4PM-5PM
                                 </label>
@@ -193,7 +193,7 @@ additional information that we should know</textarea>
                             </td>
                         {% else %}
                         <td><div class="app-check bg_red">
-                            <input type="radio" class="option-input radio " disabled name="date-time-slot" value="{{appointment.date}}:slot_6"/>
+                            <input type="radio" class="option-input radio " disabled name="date-time-slot" value="{{appointment.date}}:slot_4PM_to_5PM"/>
                             <div class="app-border">
                             <label class="app-label">4PM-5PM
                             </label>
@@ -202,7 +202,7 @@ additional information that we should know</textarea>
                         {% endif %}
                         {% if appointment.slot_5PM_to_6Pm == "available" %}
                             <td><div class="app-check bg_green">
-                                <input type="radio" class="option-input radio" name="date-time-slot" value="{{appointment.date}}:slot_7"/>
+                                <input type="radio" class="option-input radio" name="date-time-slot" value="{{appointment.date}}:slot_5PM_to_6Pm"/>
                                 <div class="app-border">
                                 <label class="app-label">5PM-6PM
                                 </label>
@@ -210,7 +210,7 @@ additional information that we should know</textarea>
                             </td>
                         {% else %}
                         <td><div class="app-check bg_red">
-                            <input type="radio" class="option-input radio " disabled name="date-time-slot" value="{{appointment.date}}:slot_7"/>
+                            <input type="radio" class="option-input radio " disabled name="date-time-slot" value="{{appointment.date}}:slot_5PM_to_6Pm"/>
                             <div class="app-border">
                             <label class="app-label">5PM-6PM
                             </label>
@@ -222,6 +222,7 @@ additional information that we should know</textarea>
                     
                 </table>
                 <input type="submit" value="hello">
+                <input type="reset" value="reset">
             </div>
         </div>
     

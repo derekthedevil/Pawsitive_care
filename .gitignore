@@ -6,3 +6,4 @@ appointments/migrations/0003_auto_20240509_1655.py
 appointments/migrations/0004_auto_20240509_1656.py
 appointments/migrations/0005_auto_20240509_1703.py
 appointments/migrations/0006_auto_20240509_1710.py
+appointments/migrations/0008_userapp.py
