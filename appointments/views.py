@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from appointments.models import AppointmentsSchedule,UserApp
+from appointments.models import AppointmentsSchedule,User_App
 import datetime
 from django.db.models import Q
 
@@ -18,7 +18,7 @@ def set_appointment(request ,date_time_slot):
     app = AppointmentsSchedule.objects.get(date=slot_date)
     setattr(app,slot_list[1],"not_available")
     app.save()
-    UserApp.objects.create(user_id=user ,Booked_date=slot_date,Slot_time=slot_list[1],pet_type=pet_type,add_info=add_info)
+    User_App.objects.create(user_id=user ,Booked_date=slot_date,Slot_time=slot_list[1],pet_type=pet_type,add_info=add_info)
     app = AppointmentsSchedule.objects.none()
 
 def week_fun(date_start= datetime.date.today()):

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from user.models import Pets
 
 # Create your models here.
 class AppointmentsSchedule(models.Model):
@@ -20,7 +21,7 @@ class AppointmentsSchedule(models.Model):
         return str_date
 
 
-class UserApp(models.Model):
+class User_App(models.Model):
     slot_choice = (
         ("slot_9AM_to_10AM" ,"slot_9AM_to_10AM"),
         ("slot_10AM_to_11AM" ,"slot_10AM_to_11AM"),
@@ -46,6 +47,6 @@ class UserApp(models.Model):
     user_id = models.ForeignKey(User,on_delete=models.CASCADE,db_column="user_id")
     Booked_date = models.DateField()
     Slot_time = models.CharField(max_length=20,choices=slot_choice , db_column="slot_time")
-    pet_type = models.CharField(max_length=20,choices=pet_choice,db_column="pet_type")
+    pet_id = models.ForeignKey(Pets,on_delete=models.CASCADE ,db_column="pet_id")
     add_info = models.CharField(max_length=50)
     

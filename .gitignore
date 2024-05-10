@@ -7,3 +7,11 @@ appointments/migrations/0004_auto_20240509_1656.py
 appointments/migrations/0005_auto_20240509_1703.py
 appointments/migrations/0006_auto_20240509_1710.py
 appointments/migrations/0008_userapp.py
+appointments/__pycache__/views.cpython-312.pyc
+appointments/migrations/0009_auto_20240510_1538.py
+appointments/migrations/0010_auto_20240510_1540.py
+appointments/migrations/0011_auto_20240510_1543.py
+Pawsitive_care/__pycache__/settings.cpython-312.pyc
+user/migrations/__init__.py
+user/migrations/0001_initial.py
+Pawsitive_care/__pycache__/settings.cpython-312.pyc

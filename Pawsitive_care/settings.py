@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 # own 
     'products',
     'appointments',
+    "user",
 ]
 
 MIDDLEWARE = [
