@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from user.models import Pets
+from products.models import ProductTable
 
 # Create your models here.
 class AppointmentsSchedule(models.Model):
@@ -50,3 +51,4 @@ class User_App(models.Model):
     pet_id = models.ForeignKey(Pets,on_delete=models.CASCADE ,db_column="pet_id")
     add_info = models.CharField(max_length=50)
     
+

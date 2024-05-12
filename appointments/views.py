@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from appointments.models import AppointmentsSchedule,User_App
 import datetime
 from django.db.models import Q
+from user.models import Pets
 
 
 # Create your views here.
@@ -10,7 +11,8 @@ last_date =  datetime.date.today() + datetime.timedelta(days=7)
 
 def set_appointment(request ,date_time_slot):
     user = request.user
-    pet_type = request.POST['pet_type']
+    pet = request.POST['pet_type']
+    pet = Pets.objects.get(pet_name=pet)
     service = request.POST['service']
     add_info = request.POST['add_info']
     slot_list = date_time_slot.split(":")
@@ -18,7 +20,7 @@ def set_appointment(request ,date_time_slot):
     app = AppointmentsSchedule.objects.get(date=slot_date)
     setattr(app,slot_list[1],"not_available")
     app.save()
-    User_App.objects.create(user_id=user ,Booked_date=slot_date,Slot_time=slot_list[1],pet_type=pet_type,add_info=add_info)
+    User_App.objects.create(user_id=user ,Booked_date=slot_date,Slot_time=slot_list[1],pet_id=pet,add_info=add_info)
     app = AppointmentsSchedule.objects.none()
 
 def week_fun(date_start= datetime.date.today()):
@@ -32,6 +34,11 @@ def week_fun(date_start= datetime.date.today()):
 def appointments(request, date_start = datetime.date.today()):
     data = {}
     data['appointments']=week_fun(date_start)
+    pets = Pets.objects.filter(owner_id=request.user.id)
+    if pets == None :
+        data["pet_error"] = "first add your pets to book appointment "
+    else :
+        data['pets'] = pets
     if request.method == "POST":
         date_time_slot = request.POST['date-time-slot']
         if request.user.is_authenticated :
