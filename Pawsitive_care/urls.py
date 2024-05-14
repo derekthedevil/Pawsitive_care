@@ -26,7 +26,10 @@ urlpatterns = [
     path('login/', views.user_login),
     path('register', views.user_register),
     path('logout/', views.user_logout),
+    path('cart/', views.cart),
     path('products/', include('products.product_urls')),
+    path('cart/delete/<cart_id>', views.delete),
+    path('cart/update/<update>/<cart_id>', views.cart_update),
     path('appointments/', include('appointments.appointment_urls')),
 ]
 urlpatterns += static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)

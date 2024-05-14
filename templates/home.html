@@ -35,7 +35,8 @@
         </nav>
         <div class="cart">
             {% if user.is_authenticated %}
-            <i class="bi bi-cart3 border rounder-border"></i>            {% endif %}
+            <a href="/cart"><i class="bi bi-cart3"></i></a>        
+            {% endif %}
         </div>
         
     </header>
