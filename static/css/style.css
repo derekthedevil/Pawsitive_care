@@ -53,6 +53,7 @@ body{
     scroll-behavior: smooth;
     /* overflow: hidden; */
     background-image: url(../images/istockphoto-1388281684-612x612.jpg);
+    position: absolute;
 }
 .logo{
     padding-left: 10px;
@@ -107,6 +108,8 @@ svg {
     border-bottom-right-radius: 20px;
     background-color: antiquewhite;
     border-top: none;
+    top: 0px;
+    position: sticky;
 }
 
 marquee{

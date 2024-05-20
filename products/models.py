@@ -9,5 +9,6 @@ class ProductTable(models.Model):
     quantity = models.PositiveIntegerField()
     image=models.ImageField(upload_to="images")
     is_available =models.BooleanField(default=True)
+    category = models.CharField(max_length=100,default="mobile")
 
 

@@ -6,9 +6,10 @@ from products.models import ProductTable
 # Create your models here.
 class User_info(models.Model):
     user_id = models.ForeignKey(User,on_delete=models.CASCADE,db_column="user_id")
-    phone = models.CharField(max_length=10)
-    pincode = models.CharField(max_length=10)
-    address = models.CharField(max_length=50)
+    phone = models.CharField(max_length=10,null=True)
+    pincode = models.CharField(max_length=10,null=True)
+    address = models.CharField(max_length=200,null=True)
+    image = models.FileField(upload_to='images', default='images/default.png')
 
 class Pets(models.Model):
     pet_choice = (

@@ -101,6 +101,11 @@ svg {
   /* background-color: aqua; */
   padding: 10px;
 }
+.bg_antique{
+  background-color: antiquewhite;
+}
+
+
 
 .response {
   height: 100%;

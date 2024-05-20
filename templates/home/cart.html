@@ -13,51 +13,7 @@
 </head>
 
 <body>
-    <header class="border border-bottom border-black">
-        <div class="logo">
-            <p>
-                <?xml version="1.0" ?><svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
-                    <rect fill="none" height="256" width="256" />
-                    <circle cx="212" cy="108" fill="none" r="20" stroke="#000" stroke-linecap="round"
-                        stroke-linejoin="round" stroke-width="16" />
-                    <circle cx="44" cy="108" fill="none" r="20" stroke="#000" stroke-linecap="round"
-                        stroke-linejoin="round" stroke-width="16" />
-                    <circle cx="92" cy="60" fill="none" r="20" stroke="#000" stroke-linecap="round"
-                        stroke-linejoin="round" stroke-width="16" />
-                    <circle cx="164" cy="60" fill="none" r="20" stroke="#000" stroke-linecap="round"
-                        stroke-linejoin="round" stroke-width="16" />
-                    <path
-                        d="M183.2,155.9a43.6,43.6,0,0,1-20.6-26h0a36,36,0,0,0-69.2,0h0a43.6,43.6,0,0,1-20.6,26A32,32,0,0,0,88,216a32.4,32.4,0,0,0,12.5-2.5,71.8,71.8,0,0,1,55,0A32.4,32.4,0,0,0,168,216a32,32,0,0,0,15.2-60.1Z"
-                        fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
-                </svg>
-            </p>
-            <p>sitive Care</p>
-        </div>
-        <!-- <div class="store-name">l
-            Pawsitive care 
-        </div> -->
-        <nav class="nav-list">
-            <ul class="list">
-                <li><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="/products" target="_self">Products</a></li>
-                <li><a href="/appointments" target="_self">Appointments</a></li>
-                {% if user.is_authenticated %}
-                <li><a href="/logout">logout</a></li>
-                {% else %}
-                <li><a href="/login">Login</a></li>
-                <li><a href="/register">register</a></li>
-                {% endif %}
-
-            </ul>
-        </nav>
-        <div class="cart">
-            {% if user.is_authenticated %}
-            <a href="/cart"><i class="bi bi-cart3"></i></a>
-            {% endif %}
-        </div>
-
-    </header>
+    {% include "navbar.html" %}
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-12">

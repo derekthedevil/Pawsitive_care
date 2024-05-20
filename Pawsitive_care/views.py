@@ -2,10 +2,14 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
-from user.models import Cart_Table
+from user.models import Cart_Table,User_info
 
 def home(request):
-    return render(request,'home.html')
+    data ={}
+    if request.user.is_authenticated :
+        user_info = User_info.objects.get(user_id=request.user.id)
+        data['user_info'] = user_info
+    return render(request,'home.html',context=data)
 
 def user_register(request):
     data={}
@@ -26,6 +30,7 @@ def user_register(request):
             return render(request,'user/register.html',context=data)
         else:  
             new_user=User.objects.create(username=uname)
+            User_info.objects.create(user_id=new_user)
             new_user.set_password(upass)
             new_user.save()
             return redirect('/')
@@ -104,3 +109,36 @@ def cart_update(request,cart_id,update):
             cart.quantity -= 1 
             cart.save()
     return redirect("/cart")
+
+def user_settings(request):
+    return render(request,"user/user_setting.html")
+
+def generel_settings(request):
+    user_id = request.user.id 
+    user = User.objects.get(id=user_id)
+    data={}
+    user_info = User_info.objects.get(user_id=user_id)
+    data['user_info'] = user_info
+    if request.method=="POST":
+        username = request.POST.get('username')
+        email = request.POST['email']
+        phone = request.POST['phone']
+        firstname = request.POST['firstname']
+        lastname = request.POST['lastname']
+        pincode = request.POST['pincode']
+        address = request.POST['address']
+        user.username = username
+        user.email = email
+        user.last_name = lastname
+        user.first_name = firstname
+        user.save()
+        user_info = User_info.objects.get(user_id=user_id)
+        user_info.phone = phone
+        user_info.pincode = pincode
+        user_info.address = address
+        if 'image' in request.FILES :
+            user_info.image = request.FILES['image']
+        user_info.save()
+        data['user_info'] = user_info
+    
+    return render(request,"user/general_settings.html",context=data)
