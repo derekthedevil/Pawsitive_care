@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
-<body>
+<body class="w-100">
     {% include "navbar.html" %}
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -104,8 +104,9 @@ var options = {
     "order_id": "{{id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
     "handler": function (response){
         alert(response.razorpay_payment_id);
-        alert(response.razorpay_order_id);
-        alert(response.razorpay_signature)
+        window.location.replace("/products/"+"order/" + response.razorpay_payment_id +"/" + options.amount);
+        {% comment %} alert(response.razorpay_order_id);
+        alert(response.razorpay_signature) {% endcomment %}
     },
     "prefill": {
         "name": "Tpratham bhalerao",

@@ -3,6 +3,8 @@ from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from user.models import Cart_Table,User_info
+from products.models import Order_history,Payment_history
+from django.db.models import Q
 
 def home(request):
     data ={}
@@ -51,7 +53,6 @@ def user_login(request):
             return render(request,'user/login.html',context=data)
         else:  
             user=authenticate(username=uname,password=upass)
-            print(user)
             if user is None:
                 data['error_msg']="Invalid passowrd"
                 return render(request,'user/login.html',context=data)
@@ -142,3 +143,45 @@ def generel_settings(request):
         data['user_info'] = user_info
     
     return render(request,"user/general_settings.html",context=data)
+
+
+
+def updatepass(request):
+    if not request.user.is_authenticated :
+        return redirect("/login")
+    else:
+        data ={}
+        user_info = User_info.objects.get(user_id=request.user.id)
+        data['user_info'] = user_info
+        if request.method == "POST" :
+            oldpass = request.POST['old']
+            newpass = request.POST['new']
+            confnew = request.POST['conf_new']
+            user=authenticate(username=request.user.username,password=oldpass)
+            if user is None :
+                data['error'] = "Old password is incorrect"
+                return render(request,"user/editpassword.html",context=data)
+            else :
+                if newpass != confnew :
+                    data['error'] = "new passwords do not match"
+                    return render(request,"user/editpassword.html",context=data)
+                else :
+                    user.set_password(newpass)
+                    user.save()
+                    return render(request,"user/general_settings.html",context=data)
+    return render(request,"user/editpassword.html")
+    
+    
+
+def order_history(request):
+    list1 = []
+    data ={}
+    payments = Payment_history.objects.filter(user_id=request.user.id)
+    if payments != None :
+        for i in payments :
+            orders = Order_history.objects.filter(payment_id=i.id)
+            list1.append(orders)
+        data["orders"] = list1
+    else :
+        pass
+    return render(request,"user/order_history.html",context=data)

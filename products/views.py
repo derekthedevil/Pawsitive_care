@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from products.models import ProductTable
+from products.models import ProductTable,Payment_history,Order_history
 from user.models import Cart_Table,User_info
 from django.contrib import messages
 from django.db.models import Q
@@ -54,3 +54,13 @@ def sort_by_price(request,sort_value):
         sorted_products = filtered_products.filter(is_available=True).order_by('-price')
     data['products'] = sorted_products
     return render(request,"products/products.html",context=data)
+
+
+def order(request,payment_id,amount):
+    pay = Payment_history.objects.create(id=payment_id,user_id=request.user,amount=amount)
+    cart = Cart_Table.objects.filter(uid =request.user.id )
+    user_info = User_info.objects.get(user_id=request.user.id)
+    for i in cart :
+        order = Order_history.objects.create(payment_id=pay,uid=request.user,product_id=i.pid,address=user_info.address,quantity=i.quantity,price=i.quantity * i.pid.price)
+    cart.delete()
+    return redirect("/user/general")

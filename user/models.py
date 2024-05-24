@@ -39,10 +39,3 @@ class Cart_Table(models.Model):
     pid = models.ForeignKey(ProductTable,on_delete=models.CASCADE,db_column="pid")   
     quantity = models.PositiveIntegerField()
 
-
-class Order_history(models.Model):
-    id = models.AutoField(primary_key=True)
-    uid = models.ForeignKey(User,on_delete=models.CASCADE,db_column="uid")
-    pid = models.ForeignKey(ProductTable,on_delete=models.CASCADE,db_column="pid")
-    order_date = models.DateTimeField(auto_now=True)
-    address = models.CharField(max_length=50)
