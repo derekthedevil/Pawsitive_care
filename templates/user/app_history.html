@@ -1,0 +1,25 @@
+{% extends "user/user_setting.html" %} {% block user_settings %}
+<div class="container">
+  <div class="row text-center">
+    <h1>Appointments History</h1>
+    <table cellspacing="0" cellpadding="0" class="table table-light table-striped-columns  mt-3 ">
+      <tr>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Pet</th>
+        <th>Service</th>
+      </tr>
+
+      {% for i in apps %}
+      <tr>
+        <td>{{i.Booked_date}}</td>
+        <td>{{i.Slot_time}}</td>
+        <td>{{i.pet_id}}</td>
+        <td>{{i.service}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
+{% endblock user_settings %}

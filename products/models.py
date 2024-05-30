@@ -9,7 +9,7 @@ class ProductTable(models.Model):
     quantity = models.PositiveIntegerField(null=True)
     image=models.ImageField(upload_to="images")
     is_available =models.BooleanField(default=True)
-    category = models.CharField(max_length=100,default="mobile")
+    category = models.CharField(max_length=100)
 
 
 class Payment_history(models.Model):

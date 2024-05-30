@@ -2,9 +2,13 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
-from user.models import Cart_Table,User_info
+from user.models import Cart_Table,User_info,Pets
 from products.models import Order_history,Payment_history
+from appointments.models import User_App
 from django.db.models import Q
+from django.core.mail import send_mail
+from django.conf import settings
+import random
 
 def home(request):
     data ={}
@@ -58,6 +62,8 @@ def user_login(request):
                 return render(request,'user/login.html',context=data)
             else:
                 login(request,user)
+                if user.is_superuser :
+                        return redirect('/adminpannel/admin')
                 return redirect('/')
     return render(request,'user/login.html')
 
@@ -144,6 +150,24 @@ def generel_settings(request):
     
     return render(request,"user/general_settings.html",context=data)
 
+def addpets(request):
+    data={}
+    data['pets'] =Pets.objects.filter(owner_id=request.user.id)
+    user_info = User_info.objects.get(user_id=request.user.id)
+    data['user_info'] = user_info
+    if request.method=="POST" :
+        name = request.POST['name']
+        gender = request.POST['gender']
+        age = request.POST['age']
+        type= request.POST['type']
+        Pets.objects.create(pet_name=name,pet_type=type,age=age,gender=gender,owner_id=request.user)
+    return render(request,"user/pets.html", context=data)
+
+def app_history(request):
+    data = {}
+    data['apps'] = User_App.objects.filter(user_id=request.user.id).order_by('Booked_date')
+    data['user_info'] = User_info.objects.get(user_id=request.user.id)
+    return render(request,"user/app_history.html",context=data)
 
 
 def updatepass(request):
@@ -169,7 +193,7 @@ def updatepass(request):
                     user.set_password(newpass)
                     user.save()
                     return render(request,"user/general_settings.html",context=data)
-    return render(request,"user/editpassword.html")
+    return render(request,"user/editpassword.html",context=data)
     
     
 
@@ -185,3 +209,42 @@ def order_history(request):
     else :
         pass
     return render(request,"user/order_history.html",context=data)
+
+def forgot_password(request):
+    if request.method == "POST" :
+        uname = request.POST['username']
+        if User.objects.filter(username=uname).exists() :
+            user = User.objects.get(username=uname)
+            url = "forgotpassword/update/" + user.username
+            global otp
+            otp = random.randint(1111,9999)
+            send_mail(
+    "otp for password change - Pawsitive care" ,
+    "Your otp is " + str(otp),
+    settings.EMAIL_HOST_USER,
+    [user.email],
+    fail_silently=False,)
+            return redirect(url)
+    return render(request,"user/forgotpassword.html")
+
+
+def passotp(request,uname):
+    user = User.objects.get(username=uname)
+    data = {}
+    if request.method == "POST":
+        uotp = request.POST['otp']
+        uotp = int(uotp)
+        password = request.POST['password']
+        confpass = request.POST['confpass']
+        global otp
+        if uotp != otp :
+            print(uotp,type(uotp),otp,type(otp))
+            data['error'] = "otp does not match"
+        elif password != confpass :
+            data['error'] = "passwords do not match"
+        elif uotp == otp and password == confpass : 
+            user.set_password(password)
+            user.save()
+            otp = None 
+            return redirect("/login")
+    return render(request,"user/otppass.html",context=data)

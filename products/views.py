@@ -7,12 +7,14 @@ from django.db.models import Q
 # Create your views here.
 products = ProductTable.objects.filter(is_available =True)
 def products(request):
-    data = {}
+    data={}
     if request.user.is_authenticated :
         user_info = User_info.objects.get(user_id=request.user.id)
         data['user_info'] = user_info
-    products = ProductTable.objects.filter(is_available =True)
-    data['products'] = products
+    global filtered_products
+    products=ProductTable.objects.filter(is_available=True)
+    filtered_products=products
+    data['products']=products
     return render(request,'products/products.html',context=data)
 
 
@@ -35,25 +37,47 @@ def add_to_cart(request,product_id):
         return redirect("/login") 
     
 
-def filter_category(request,str=None):
-    data ={}
-    q1 = Q(is_available=True)
-    q2 = Q(category=str)
-    products = ProductTable.objects.filter(is_available =True)
-    global filtered_products
-    filtered_products = products.filter(q1 & q2)
-    data['products'] = filtered_products
-    return render(request,"products/products.html",context=data)
 
+def filter_by_category(request,category_value):
+    data={}
+    if request.user.is_authenticated :
+        user_info = User_info.objects.get(user_id=request.user.id)
+        data['user_info'] = user_info
+    q1 = Q(is_available=True)
+    q2 = Q(category=category_value)
+    # global products
+    global filtered_products
+    filtered_products=ProductTable.objects.filter(q1 & q2)
+    data['products']=filtered_products
+    return render(request,'products/products.html',context=data)
 
 def sort_by_price(request,sort_value):
-    data ={}
-    if sort_value == 'asc' :
-        sorted_products = filtered_products.filter(is_available=True).order_by('price')
-    else :
-        sorted_products = filtered_products.filter(is_available=True).order_by('-price')
-    data['products'] = sorted_products
-    return render(request,"products/products.html",context=data)
+    data={}
+    if request.user.is_authenticated :
+        user_info = User_info.objects.get(user_id=request.user.id)
+        data['user_info'] = user_info
+    global filtered_products
+    if(sort_value=='asc'):
+        sorted_products=filtered_products.filter(is_available=True).order_by('price')
+    else:
+        sorted_products=filtered_products.filter(is_available=True).order_by('-price')
+    data['products']=sorted_products
+    return render(request,'products/products.html',context=data)
+
+def search_by_price_range(request):
+    print("in search")
+    data={}
+    if request.user.is_authenticated :
+        user_info = User_info.objects.get(user_id=request.user.id)
+        data['user_info'] = user_info
+    min=request.POST['min']
+    max=request.POST['max']
+    q1 = Q(is_available=True)
+    q2 = Q(price__gte=min)
+    q3 = Q(price__lte=max)
+    searched_products = filtered_products.filter(q1 & q2 & q3)
+    data['products']=searched_products
+    return render(request,'products/products.html',context=data)
 
 
 def order(request,payment_id,amount):

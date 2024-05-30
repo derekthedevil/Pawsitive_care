@@ -1,0 +1,47 @@
+<!-- <html>
+    <body>
+        <form action="" method="post">  
+            {% csrf_token %}
+            {{error}}
+            <label for="otp">otp</label>
+            <input type="number" name="otp" id="otp" required="required" placeholder="Enter OTP" />
+            <label for="password">password</label>
+            <input type="text" name="password" id="password" required="required" placeholder="Enter new password" />
+            <label for="confpass">confirm pass</label>
+            <input type="text" name="confpass" id="confpass" required="required" placeholder="confirm pass" />
+            <input type="submit" value="submit">
+        </form>
+    </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>update password </title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+
+<body ></body>
+    <div>
+        <p>update password </p>
+        <p id="error_msg">{{error}}
+        </p>
+        <table>
+            <form  method="post">
+                {% csrf_token %}
+            <tr id="label"><td><label for="otp">otp: </label></td></tr>
+            <tr id="text-input"><td><input type="text" name="otp" id="otp" placeholder=""></td></tr>
+            <tr id="label"><td><label for="password"> New Password:</label></td></tr>
+            <tr id="text-input"><td><input type="password" name="password" id="password" placeholder="*********"></td></tr>
+            <tr id="label"><td><label for="confpass">Confirm password:</label></td></tr>
+            <tr id="text-input"><td><input type="password" name="confpass" id="confpass" placeholder="*********"></td></tr>
+            <tr><td><hr color="black"/></td></tr>
+            <tr id="text-input"><td><input id="login"type="submit" value="change password"></td></tr>
+        </form>
+        </table>
+    </div>
+</body>
+</html>

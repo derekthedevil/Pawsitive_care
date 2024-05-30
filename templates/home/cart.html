@@ -105,8 +105,6 @@ var options = {
     "handler": function (response){
         alert(response.razorpay_payment_id);
         window.location.replace("/products/"+"order/" + response.razorpay_payment_id +"/" + options.amount);
-        {% comment %} alert(response.razorpay_order_id);
-        alert(response.razorpay_signature) {% endcomment %}
     },
     "prefill": {
         "name": "Tpratham bhalerao",

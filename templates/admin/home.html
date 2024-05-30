@@ -1,0 +1,150 @@
+{% extends 'admin/admin.html' %}
+{% block adminbodycontent %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/appointments.css' %}" />
+
+<style>
+    td div{
+        min-height: 100px;
+        min-width: 100px;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <h1>Todays Schedule</h1>
+        <table style="background-color:antiquewhite;" cellspacing="0" cellpadding="0" class="container table table-sm">
+            <tr class="text-center">
+                <th>slot 9 to 10 </th>
+                <th>slot 10 to 11 </th>
+                <th>slot 11 to 12 </th>
+                <th>slot 1 to 2 </th>
+                <th>slot 2 to 3 </th>
+                <th>slot 3 to 4 </th>
+                <th>slot 4 to 5 </th>
+            </tr>
+            
+            {% if appointment %}
+                
+                <tr class="" style="height: 50px;">
+                    <!-- <th>{{appointment.date}}</th> -->
+                    {% if appointment.slot_9AM_to_10AM == "available" %}
+                        <td><div class="app-check bg_green">
+                            <div class="app-border text-center">
+                            <p>None</p>
+                        </div>
+                        </td>
+                    {% else %}
+                    <td><div class="app-check bg_red">
+                        <div class="app-border text-center" id="slot_9AM_to_10AM">
+                        <label class="app-label">9AM-10AM
+                            
+                            
+                        </label>
+                    </div>
+                    </td>
+                    {% endif %}
+                    {% if appointment.slot_10AM_to_11AM == "available" %}
+                        <td><div class="app-check bg_green">
+                            <div class="app-border text-center" >
+                                <p>None</p>
+                        </div>
+                        </td>
+                    {% else %}
+                    <td><div class="app-check bg_red">
+                        <div class="app-border text-center" id="slot_10AM_to_11AM">
+                        
+                    </div>
+                    </td>
+                    {% endif %}
+                    {% if appointment.slot_11AM_to_12PM == "available" %}
+                        <td><div class="app-check bg_green">
+                            <div class="app-border text-center" >
+                            <p>None</p>
+                        </div>
+                        </td>
+                    {% else %}
+                    <td><div class="app-check bg_red">
+                        <div class="app-border text-center" id="slot_11AM_to_12PM">
+                        <label class="app-label">11AM-12PM
+                            
+                            
+                        </label>
+                    </div>
+                    </td>
+                    {% endif %}
+                    {% if appointment.slot_1PM_to_2PM == "available" %}
+                        <td><div class="app-check bg_green">
+                            <div class="app-border text-center">
+                            <p>None</p>
+                        </div>
+                        </td>
+                    {% else %}
+                    <td><div class="app-check bg_red">
+                        <div class="app-border text-center"id="slot_1PM_to_2PM">
+                        <label class="app-label">1PM-2PM
+                            
+                            
+                        </label>
+                    </div>
+                    </td>
+                    {% endif %}
+                    {% if appointment.slot_2PM_to_3PM == "available" %}
+                        <td><div class="app-check bg_green">
+                            <div class="app-border text-center">
+                            <p>None</p>
+                        </div>
+                        </td>
+                    {% else %}
+                    <td><div class="app-check bg_red">
+                        <div class="app-border text-center"id="slot_2PM_to_3PM">
+                        <label class="app-label">2PM-3PM
+                            
+                            
+                        </label>
+                    </div>
+                    </td>
+                    {% endif %}
+                    {% if appointment.slot_4PM_to_5PM == "available" %}
+                        <td><div class="app-check bg_green">
+                            <div class="app-border text-center">
+                            <p>None</p>
+                        </div>
+                        </td>
+                    {% else %}
+                    <td><div class="app-check bg_red">
+                        <div class="app-border text-center"id="slot_4PM_to_5PM">
+                        
+                    </div>
+                    </td>
+                    {% endif %}
+                    {% if appointment.slot_5PM_to_6Pm == "available" %}
+                        <td><div class="app-check bg_green">
+                            <div class="app-border text-center">
+                            <label class="app-label">None
+                            </label>
+                        </div>
+                        </td>
+                    {% else %}
+                    <td><div class="app-check bg_red">
+                        <div class="app-border text-center"id="slot_5PM_to_6Pm">
+                        
+                            
+                            
+                        </label>
+                    </div>
+                    </td>
+                    {% endif %}
+                </tr>
+                {% endif %}
+            
+            
+        </table>
+    </div>
+</div>
+<script>
+    {% for i in apps %}
+        document.getElementById("{{i.Slot_time}}").innerHTML="<p>Owner : {{i.user_id.username}}</p>  <p>Pet Type : {{i.pet_id.pet_type}}</p> <p>Pet : {{i.pet_id.pet_name}}</p>   <p>Service : {{i.service}}</p> ";
+    {% endfor %}
+</script>
+
+{% endblock adminbodycontent %} 

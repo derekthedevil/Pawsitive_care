@@ -3,6 +3,38 @@ from appointments.models import AppointmentsSchedule,User_App
 import datetime
 from django.db.models import Q
 from user.models import Pets,User_info
+from django.core.mail import send_mail
+from django.conf import settings
+
+
+
+def send_app_mail(user,date,slot) :
+    q1 = Q(user_id=user.id)
+    q2 = Q(Booked_date=date)
+    q3 = Q(Slot_time=slot)
+
+    user_app = User_App.objects.get(q1 & q2 & q3)
+    send_mail(
+    "Your Appointment Confirmation - Pawsitive care" ,
+    """<html>
+<body><h1>
+    Hi ,
+
+This email confirms your pet's appointment for '""" +user_app.service +"""'  at Pawsitive care on  '"""+ date.strftime('%d/%m/%Y') +"""' at '"""+slot+  """'.
+
+
+We're excited to see """+user_app.pet_id.pet_name+  """  !
+
+Best regards,
+
+The Pawsitive care Team
+</h1><body</html>
+    """,
+    settings.EMAIL_HOST_USER,
+    [user.email],
+    fail_silently=False,
+)
+
 
 
 # Create your views here.
@@ -20,7 +52,8 @@ def set_appointment(request ,date_time_slot):
     app = AppointmentsSchedule.objects.get(date=slot_date)
     setattr(app,slot_list[1],"not_available")
     app.save()
-    User_App.objects.create(user_id=user ,Booked_date=slot_date,Slot_time=slot_list[1],pet_id=pet,add_info=add_info)
+    User_App.objects.create(user_id=user ,Booked_date=slot_date,Slot_time=slot_list[1],pet_id=pet,add_info=add_info,service=service)
+    send_app_mail(user=user,date=slot_date,slot=slot_list[1])
     app = AppointmentsSchedule.objects.none()
 
 def week_fun(date_start= datetime.date.today()):

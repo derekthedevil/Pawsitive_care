@@ -17,8 +17,9 @@
     <section class="appointment-page" method="POST">
         
         <div class="response">
-            <div>
-                <h1>Appointment details</h1>
+            <div class=text-center>
+                <label for="email" class="w-100"><h1>email</h1></label>
+                <input type="text" name="email" id="email" required value="{{request.user.email}}">
             </div>
             <div class="pet-type">
                 {% if pets %}

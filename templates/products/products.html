@@ -19,20 +19,27 @@
     <section class="products " id="products">
         <div class="filter">
             <h2>Filter by:</h2>
-            <a class="nav-link dropdown-toggle"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Category
-            </a>
-            <ul class="dropdown-menu category">
-                <li><a class="dropdown-item" href="/products/category/mobile">Mobile</a></li>
-                <li>
-                <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="/products/category/shoes">Shoes</a></li>
-                <li>
-                <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="/products/category/clothes">Clothes</a></li>
-            </ul>
+            <div class="tab mt-5">
+                <h5>Category :</h5>
+                <a class="btn btn-light border border-black w-75 mt-1 rounded" href="/products" >All</a>
+                <a class="btn btn-light border border-black w-75 mt-1 rounded" href="/products/category/food" >Food</a>
+                <a class="btn btn-light border border-black w-75 mt-1 rounded" href="/products/category/grooming" >Grooming</a>
+                <a class="btn btn-light border border-black w-75 mt-1 rounded" href="/products/category/acessories" >Acessories</a>
+            </div>
+            <div class="tab mt-5">
+                <h5>Sort By :</h5>
+                <a class="btn btn-light border border-black w-75 mt-1 rounded" href="/products/sort/asc" >Low to High</a>
+                <a class="btn btn-light border border-black w-75 mt-1 rounded" href="/products/sort/dsc" >High to Low</a>
+                
+            </div>
+            <form class="m-2 mt-5" action="/products/search/" method="POST">
+                {% csrf_token %}
+                <h5>Price Range :</h5>
+                <input class="form-control mx-auto mb-2 w-75 border border-black w-75 mt-1 rounded" type="number" placeholder="min" name="min">
+                <input class="form-control mx-auto mb-2 w-75 border border-black w-75 mt-1 rounded" type="number" placeholder="max" name="max">
+                <input class="btn btn-light w-75 border border-black w-75 mt-1 rounded" type="submit" value="search">
+            </form>
+        
         </div>
         <div class="product-section">
             {% if messages %}
@@ -52,6 +59,7 @@
         {% endif %}
             <div class="container-fluid mt-3 ">
                 <div class="row gx-1 gy-2">
+                    
                     {% for product in products %}
                     <div class="col-lg-3">
                         <div class="card product" style="width:20rem">
@@ -97,6 +105,22 @@
                         </div>
                     </div>
                     {% endfor %}
+                    {% for product in products %}
+                    <div class="col-lg-3">
+                        <div class="card product" style="width:20rem">
+                            <img src="{{product.image.url}}" class="card-img-top" alt="..." height="300px"/>
+                            <div class="card-body">
+                                <h5 class="card-title">{{product.name}}</h5>
+                                <h5 class="card-title">&#8377; {{product.price}}</h5>
+                                <p class="card-text">
+                                {{product.description}}
+                                </p>
+                                <a href="/products/addtocart/{{product.id}}" class="btn btn-primary">Add to cart</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    
                 </div>
             </div>
            

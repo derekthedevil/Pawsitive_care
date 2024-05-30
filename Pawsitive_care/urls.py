@@ -31,9 +31,15 @@ urlpatterns = [
     path('user/general', views.generel_settings),
     path('user/order-history', views.order_history),
     path('user/updatepass', views.updatepass),
-    path('products/', include('products.product_urls')),
+    path('products/',include('products.product_urls')),
     path('cart/delete/<cart_id>', views.delete),
     path('cart/update/<update>/<cart_id>', views.cart_update),
-    path('appointments/', include('appointments.appointment_urls')),
+    path('appointments/',include('appointments.appointment_urls')),
+    path('forgotpassword', views.forgot_password),
+    path('forgotpassword/update/<uname>', views.passotp),
+    path("adminpannel/",include('admin.admin_urls')),
+    path('user/addpets', views.addpets),
+    path('user/apphistory', views.app_history),
+
 ]
 urlpatterns += static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)

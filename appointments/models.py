@@ -50,5 +50,5 @@ class User_App(models.Model):
     Slot_time = models.CharField(max_length=20,choices=slot_choice , db_column="slot_time")
     pet_id = models.ForeignKey(Pets,on_delete=models.CASCADE ,db_column="pet_id")
     add_info = models.CharField(max_length=50)
-    
+    service = models.CharField(max_length=15,default="grooming",choices=services)
 

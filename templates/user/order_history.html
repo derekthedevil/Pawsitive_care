@@ -5,38 +5,28 @@
     <div class="row">
         {% for i in orders %}
             <div class="col-9 mx-auto border border-black rounded-2 my-2">
-                <table class="table">
+                <table class="table table-hove">
                     <thead>
                       <tr class="text-center">
-                        <th scope="col">ID</th>
                         <th scope="col">IMAGE</th>
                         <th scope="col">NAME</th>
                         <th scope="col">PRICE</th>
-                        <th scope="col">CATEGORY</th>
                         <th scope="col">QUANTITY</th>
-                        <th scope="col">DESCRIPTION</th>
-                        <th scope="col" colspan="2">ACTION</th>
                       </tr>
                     </thead>
                     <tbody>
                       {% for order in i %}
                       <tr class="text-center">
-                        <th>{{order.id}}</th>
                         <td>
                           
-                          <!-- <img id="enlarge" src="{{product.images.url}}" alt="" width="40px" height="40px"> -->
+                          <img id="enlarge" src="{{order.product_id.image.url}}" alt="" width="40px" height="40px">
                         </td>
-                        <!-- <td>{{product.name}}</td>
-                        <td>{{product.price}}</td>
-                        <td>{{product.category}}</td>
-                        <td>{{product.quantity}}</td>
-                        <td>{{product.description}}</td> -->
-                        <td>
-                          <a href='http://127.0.0.1:8000/admin/product/edit_product/{{product.id}}'> <button type="button" class="btn btn-outline-primary" ><i class="bi bi-pencil"></i></button> </a>
-                        </td>
-                        <td>
-                          <a href='http://127.0.0.1:8000/admin/product/delete/{{product.id}}'><button type="button" class="btn btn-outline-danger"><i class="bi bi-trash"></i></button></a>
-                        </td>
+                        <td>{{order.product_id.name}}</td>
+                        <td>{{order.price}}</td>
+                        
+                        <td>{{order.quantity}}</td>
+                        
+                        
                       </tr> 
                       {% endfor %}
                     </tbody>

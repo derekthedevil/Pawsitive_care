@@ -1,0 +1,65 @@
+{% extends "user/user_setting.html" %} 
+{% block user_settings %}
+        <div class="container text-center">
+            <h1>Pets</h1>
+            <div class="row" height="">
+                {% for i in pets %}
+                <div class="col-6">
+                    <div class="row border border-2 border-black rounded text-start py-2 mx-auto my-2" style="min-height:70px;">
+                        <div class="col-6 text-start">
+                            Pet <b> {{forloop.counter}} </b><br>
+                            Name :<b> {{i.pet_name}}</b> <br>
+                            Gender :<b> {{i.gender}}</b>
+                        </div>
+                        <div class="col-6">
+                            {{i.some}}<br>
+                            Pet type : <b> {{i.pet_type}}</b>  <br>
+                            Age:<b> {{i.age}}</b>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                
+            </div>
+            <form  method="post">
+                {% csrf_token %}
+            <div class="row">
+                <h3>Add a new Pet </h3>
+                <div class="col-6 mt-4 bg_mustar">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required/>
+                    </div>
+                    <div class="mb-2">
+                        <label for="gender" class="form-label">Gender </label>
+                        <select  class="form-control" name="gender" id="gender" required>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    <div class="mb-2">
+                        <input class="btn btn-primary w-75" type="submit" value="submit">
+                    </div>
+                </div>
+                <div class="col-6 mt-4 bg_mustar">
+                    <div class="mb-2">
+                        <label for="type" class="form-label">Pet Type </label>
+                        <select type="text" class="form-control" name="type" id="type" required>
+                            <option value="Dog">Dog</option>
+                            <option value="Cat">Cat</option>
+                            <option value="Bird">Bird</option>
+                            <option value="Hamster">Hamster</option>
+                        </select>
+                    </div>
+        
+                    <div class="mb-2">
+                        <label for="age" class="form-label">Age</label>
+                        <input type="number" class="form-control" name="age" id="age" required/>
+                    </div>
+                    <div class="mb-2">
+                        <input class="btn btn-warning w-75" type="reset" value="reset">
+                    </div>
+                </div>
+                </form>
+            </div>
+            {% endblock user_settings %}
