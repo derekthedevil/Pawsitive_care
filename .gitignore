@@ -1,2 +1,5 @@
 images
 migrations
+appointments/views.py
+appointments/__pycache__/views.cpython-312.pyc
+appointments/__pycache__/views.cpython-312.pyc

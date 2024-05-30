@@ -47,6 +47,8 @@ def set_appointment(request ,date_time_slot):
     pet = Pets.objects.get(pet_name=pet)
     service = request.POST['service']
     add_info = request.POST['add_info']
+    user.email = request.POST['email']
+    user.save()
     slot_list = date_time_slot.split(":")
     slot_date= datetime.datetime.strptime(slot_list[0] ,"%B %d, %Y")
     app = AppointmentsSchedule.objects.get(date=slot_date)
